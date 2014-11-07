@@ -12,12 +12,14 @@ using namespace MyEngine;
 class BoundingBoxClass 
 {
 	String m_sInstance;//The name of the instance related to this Box
-	bool m_bVisible;//Flag for rendering or not
-	float m_fRadius;//Radius of the Box
-	vector3 m_v3Centroid;//Centroid of the Box
+	bool m_bOBBVisible;//Flag for rendering or not OBB
+	bool m_bAABBVisible;
+	vector3 m_v3AABBCentroid;//Centroid of the Box
+	vector3 m_v3OBBCentroid;
 	vector3 m_v3Color;//Color of the box
 	matrix4 m_mModelToWorld;//Model matrix of the box
-	PrimitiveWireClass* m_pMesh;//box Mesh
+	PrimitiveWireClass* m_pOBBMesh;//box Mesh
+	PrimitiveWireClass* m_pAABBMesh;
 	ModelManagerClass* m_pModelMngr;//ModelManager instance
 
 public:
@@ -31,11 +33,13 @@ public:
 	~BoundingBoxClass(void);
 
 	/* Gets the visibility of the Sphere (whether or not it is going to be drawn in render) */
-	bool GetVisible(void);
+	bool GetOBBVisible(void);
+	bool GetAABBVisible(void);
 	/*Sets the visibility of the Sphere (whether or not it is going to be drawn in render)
 	Args:
 		bool a_bVisible -> true for draw false for not draw*/
-	void SetVisible(bool a_bVisible);
+	void SetOBBVisible(bool a_bVisible);
+	void SetAABBVisible(bool a_bVisible);
 	/* Property:
 	GetVisible() or GetVisible()*/
 	__declspec(property(get = GetVisible, put = SetVisible)) bool Visible;
@@ -47,7 +51,8 @@ public:
 	__declspec(property(get = GetInstanceName)) String InstanceName;
 
 	/* Gets the centroid the bounding sphere */
-	vector3 GetCentroid(void);
+	vector3 GetAABBCentroid(void);
+	vector3 GetOBBCentroid(void);
 	/* Property:
 	GetCentroid()*/
 	__declspec(property(get = GetCentroid)) vector3 Centroid;
@@ -78,7 +83,8 @@ public:
 		Args:
 			a_vColor -> determinate the color of the sphere to be rendered, if MEDEFAULT
 			it will render the shape in the constructed color (white) */
-	void Render( vector3 a_vColor = MEDEFAULT);
+	void RenderOBB( vector3 a_vColor = MEDEFAULT);
+	void RenderAABB( vector3 a_vColor = MEDEFAULT);
 
 private:
 	/* Released Memory and objects allocated. */
@@ -86,7 +92,8 @@ private:
 	/* Calculates the sphere from the instance
 	Args:
 		a_sInstance: The name of the instance for which the bounding sphere is going to be calculated */
-	void CalculateBox(String a_sInstance);
+	void CalculateAABBBox(String a_sInstance);
+	void CalculateOBBBox(String a_sInstance);
 };
 
 
