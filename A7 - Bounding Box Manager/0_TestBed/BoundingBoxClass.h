@@ -21,6 +21,10 @@ class BoundingBoxClass
 	PrimitiveWireClass* m_pOBBMesh;//box Mesh
 	PrimitiveWireClass* m_pAABBMesh;
 	ModelManagerClass* m_pModelMngr;//ModelManager instance
+	vector3 m_vAABBMax;
+	vector3 m_vAABBMin;
+	vector3 m_vOBBMax;
+	vector3 m_vOBBMin;
 
 public:
 	/* Constructor 	*/
@@ -53,6 +57,10 @@ public:
 	/* Gets the centroid the bounding sphere */
 	vector3 GetAABBCentroid(void);
 	vector3 GetOBBCentroid(void);
+	vector3 getAABBMax(void);
+	vector3 getAABBMin(void);
+	vector3 getOBBMax(void);
+	vector3 getOBBMin(void);
 	/* Property:
 	GetCentroid()*/
 	__declspec(property(get = GetCentroid)) vector3 Centroid;

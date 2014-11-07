@@ -7,6 +7,10 @@ BoundingBoxClass::BoundingBoxClass(String a_sInstanceName)
 	m_pOBBMesh = nullptr;
 	m_v3AABBCentroid = vector3(0.0f,0.0f,0.0f);
 	m_v3OBBCentroid = vector3(0.0f,0.0f,0.0f);
+	m_vAABBMax = vector3(0.0f,0.0f,0.0f);
+	m_vAABBMin = vector3(0.0f,0.0f,0.0f);
+	m_vOBBMax = vector3(0.0f,0.0f,0.0f);
+	m_vOBBMin = vector3(0.0f,0.0f,0.0f);
 	m_v3Color = MEWHITE;
 	m_mModelToWorld = matrix4(1.0f);
 	m_bOBBVisible = false;
@@ -108,6 +112,10 @@ vector3 BoundingBoxClass::GetOBBCentroid(void) {return m_v3OBBCentroid;}
 vector3 BoundingBoxClass::GetColor(void){ return m_v3Color; }
 void BoundingBoxClass::SetColor(vector3 a_v3Color){ m_v3Color = a_v3Color; }
 matrix4 BoundingBoxClass::GetModelMatrix(void){ return m_mModelToWorld; }
+vector3 BoundingBoxClass:: getAABBMax(void){return m_vAABBMax;};
+vector3 BoundingBoxClass:: getAABBMin(void){return m_vAABBMin;};
+vector3 BoundingBoxClass:: getOBBMax(void){return m_vOBBMax;};
+vector3 BoundingBoxClass:: getOBBMin(void){return m_vOBBMin;};
 void BoundingBoxClass::SetModelMatrix(matrix4 a_mModelMatrix)
 {
 	//Sets the model matrix of the Sphere
@@ -174,7 +182,8 @@ void BoundingBoxClass::CalculateAABBBox(String a_sInstance)
 				v3Maximum.z = vVertices[nVertex].z;
 		}
 	}
-
+	m_vAABBMax = v3Maximum;
+	m_vAABBMin = v3Minimum;
 	//The centroid is going to be the point that is halfway of the min to the max
 	m_v3AABBCentroid = v3Minimum + v3Maximum;
 	m_v3AABBCentroid /= 2.0f;
@@ -320,7 +329,8 @@ void BoundingBoxClass::CalculateOBBBox(String a_sInstance)
 				v3Maximum.z = vVertices[nVertex].z;
 		}
 	}
-
+	m_vOBBMax = v3Maximum;
+	m_vOBBMin = v3Minimum;
 	//The centroid is going to be the point that is halfway of the min to the max
 	m_v3OBBCentroid = v3Minimum + v3Maximum;
 	m_v3OBBCentroid /= 2.0f;
