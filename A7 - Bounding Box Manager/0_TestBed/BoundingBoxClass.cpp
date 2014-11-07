@@ -47,10 +47,10 @@ BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
 	m_pModelMngr = other.m_pModelMngr;
 
 	m_pAABBMesh = new PrimitiveWireClass();
-	m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
+	//m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
 	m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid));
 	m_pOBBMesh = new PrimitiveWireClass();
-	m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
+	//m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
 	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid));
 }
 BoundingBoxClass& BoundingBoxClass::operator=(BoundingBoxClass const& other)
@@ -69,10 +69,10 @@ BoundingBoxClass& BoundingBoxClass::operator=(BoundingBoxClass const& other)
 		m_pModelMngr = other.m_pModelMngr;	
 
 		m_pAABBMesh = new PrimitiveWireClass();
-		m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
+		//m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
 		m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid));
 		m_pOBBMesh = new PrimitiveWireClass();
-		m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
+		//m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
 		m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid));
 	}
 	return *this;

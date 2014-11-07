@@ -121,6 +121,7 @@ xcopy "$(SolutionDir)include\ME\Shaders" "$(SolutionDir)_Binary\Shaders" /y</Com
     <ClCompile Include="ApplicationClass.cpp" />
     <ClCompile Include="ApplicationControls.cpp" />
     <ClCompile Include="BoundingBoxClass.cpp" />
+    <ClCompile Include="BoundingBoxManager.cpp" />
     <ClCompile Include="BoundingSphereClass.cpp" />
     <ClCompile Include="BoundingSphereManager.cpp" />
     <ClCompile Include="Main.cpp" />
