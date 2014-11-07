@@ -188,7 +188,85 @@ void BoundingBoxClass::CalculateAABBBox(String a_sInstance)
 	vector3 five = vector3(v3Maximum.x,v3Minimum.y,v3Minimum.z);
 	vector3 six = vector3(v3Maximum.x,v3Maximum.y,v3Minimum.z);
 	vector3 seven = vector3(v3Minimum.x,v3Maximum.y,v3Minimum.z);*/
-	//m_pAABBMesh->AddQuad();
+	//front
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+
+	//left side
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+	//right side
+	//fbr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+	//bbr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//fAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+
+
+	//ftr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	//back
+	//bbl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//bAAl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+
+	//btl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	//top
+	//ftl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+	//fAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	//bAAl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+
+	//btl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+	//fAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	//bottom
+	//bbl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//fAAl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+
+	//fbl
+	m_pAABBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	//bAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//fAAr
+	m_pAABBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+
+	m_pAABBMesh->CompileObject(m_v3Color,"OBB");
 	return;
 }
 
@@ -247,16 +325,17 @@ void BoundingBoxClass::CalculateOBBBox(String a_sInstance)
 	m_v3OBBCentroid = v3Minimum + v3Maximum;
 	m_v3OBBCentroid /= 2.0f;
 	
-	/*vector3 zero = vector3(v3Minimum.x,v3Minimum.y,v3Maximum.z);
-	vector3 one = vector3(v3Maximum.x,v3Minimum.y,v3Maximum.z);
-	vector3 two = vector3(v3Maximum.x,v3Maximum.y,v3Maximum.z);
-	vector3 three = vector3(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+	/*vector3 fbl = vector3(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	vector3 fbr = vector3(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+	vector3 ftr = vector3(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	vector3 ftl = vector3(v3Minimum.x,v3Maximum.y,v3Maximum.z);
 
-	vector3 four = vector3(v3Minimum.x,v3Minimum.y,v3Minimum.z);
-	vector3 five = vector3(v3Maximum.x,v3Minimum.y,v3Minimum.z);
-	vector3 six = vector3(v3Maximum.x,v3Maximum.y,v3Minimum.z);
-	vector3 seven = vector3(v3Minimum.x,v3Maximum.y,v3Minimum.z);*/
+	vector3 bbl = vector3(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	vector3 bbr = vector3(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	vector3 btr = vector3(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+	vector3 btl = vector3(v3Minimum.x,v3Maximum.y,v3Minimum.z);*/
 
+	//front
 	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
 	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
 	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
@@ -264,6 +343,77 @@ void BoundingBoxClass::CalculateOBBBox(String a_sInstance)
 	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
 	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
 	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+
+	//left side
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+	//right side
+	//fbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+	//bbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//ftr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+
+
+	//ftr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	//bbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//btr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	//back
+	//bbl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	//bbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//btl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+
+	//btl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+	//bbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//btr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	//top
+	//ftl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Maximum.z);
+	//ftr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	//btl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+
+	//btl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Maximum.y,v3Minimum.z);
+	//ftr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Maximum.z);
+	//btr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Maximum.y,v3Minimum.z);
+
+	//bottom
+	//bbl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Minimum.z);
+	//bbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//fbl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+
+	//fbl
+	m_pOBBMesh->AddVertexPosition(v3Minimum.x,v3Minimum.y,v3Maximum.z);
+	//bbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Minimum.z);
+	//fbr
+	m_pOBBMesh->AddVertexPosition(v3Maximum.x,v3Minimum.y,v3Maximum.z);
+
+	m_pOBBMesh->CompileObject(m_v3Color,"OBB");
 	return;
 }
 
