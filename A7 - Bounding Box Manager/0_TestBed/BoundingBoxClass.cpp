@@ -43,7 +43,7 @@ BoundingBoxClass::BoundingBoxClass(String a_sInstanceName)
 	//Crete a new Sphere and initialize it using the member variables
 	
 	m_pAABBMesh->GenerateCube(1,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 }
 BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
@@ -62,7 +62,7 @@ BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
 	m_pOBBMesh->GenerateCube(1,MEWHITE);
 	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
 	m_pAABBMesh->GenerateCube(1,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 	
 }
@@ -88,7 +88,7 @@ BoundingBoxClass& BoundingBoxClass::operator=(BoundingBoxClass const& other)
 		m_pOBBMesh->GenerateCube(1,MEWHITE);
 		m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
 		m_pAABBMesh->GenerateCube(1,MEWHITE);
-		m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
+		m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 		
 	}
@@ -137,7 +137,7 @@ void BoundingBoxClass::SetModelMatrix(matrix4 a_mModelMatrix)
 	//(which is translated m_v3Centrod away from the origin of our box)
 	m_pOBBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
 	CalculateAABBBox(m_sInstance);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
+	m_pAABBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 }
 bool BoundingBoxClass::GetOBBVisible(void) { return m_bOBBVisible; }
@@ -150,7 +150,8 @@ void BoundingBoxClass::CalculateAABBBox(String a_sInstance)
 {
 	//CalculateOBBBox(a_sInstance);
 	//Get the vertices List to calculate the maximum and minimum
-	std::vector<vector3> vVertices = m_pOBBMesh->GetVertices();
+	
+	std::vector<vector3> vVertices = m_pModelMngr->GetVertices(a_sInstance);
 	int nVertices = static_cast<int>(vVertices.size());
 	
 	//If the size of the List is 0 it means we dont have any vertices in this Instance
@@ -197,6 +198,8 @@ void BoundingBoxClass::CalculateAABBBox(String a_sInstance)
 				v3Maximum.z = vVertices[nVertex].z;
 		}
 	}
+	//v3Maximum *= m_pModelMngr->GetModelMatrix(a_sInstance);
+	//v3Minimum *= m_pModelMngr->GetModelMatrix(a_sInstance);
 	m_vAABBMax = v3Maximum;
 	m_vAABBMin = v3Minimum;
 	//The centroid is going to be the point that is halfway of the min to the max
