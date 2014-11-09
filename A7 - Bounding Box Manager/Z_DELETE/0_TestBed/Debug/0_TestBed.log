@@ -1,34 +1,46 @@
-﻿Build started 11/7/2014 1:06:39 PM.
-     1>Project "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\0_TestBed\0_TestBed.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         0_TestBed.vcxproj -> \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.exe
+﻿Build started 11/9/2014 1:49:20 PM.
+     1>Project "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\0_TestBed\0_TestBed.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D DEBUG /D _MBCS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\\" /Fd"C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\vc110.pdb" /Gd /TP /wd4251 /analyze- /errorReport:prompt /D _CRT_SECURE_NO_WARNINGS BoundingBoxClass.cpp
+         BoundingBoxClass.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.exe" /INCREMENTAL /NOLOGO glew32.lib SOIL.lib opengl32.lib glu32.lib "sfml-system.lib" "sfml-window.lib" MyEngine_d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.lib" /MACHINE:X86 "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\BTO.res"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\Application.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\ApplicationClass.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\ApplicationControls.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\BoundingBoxClass.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\BoundingBoxManager.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\BoundingSphereClass.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\BoundingSphereManager.obj"
+         "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBed\Debug\Main.obj"
+         0_TestBed.vcxproj -> C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.exe
        PostBuildEvent:
-         mkdir “\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\”
-         mkdir “\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\Shaders\”
-         copy “\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.exe” “\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary”
-         xcopy "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\GL\bin" "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary" /y
-         xcopy "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\bin" "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary" /y
-         xcopy "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders" "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\Shaders" /y
+         mkdir “C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\”
+         mkdir “C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\Shaders\”
+         copy “C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\Z_DELETE\0_TestBedD.exe” “C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary”
+         xcopy "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\GL\bin" "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary" /y
+         xcopy "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\bin" "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary" /y
+         xcopy "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders" "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\Shaders" /y
          :VCEnd
-         A subdirectory or file \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\ already exists.
-         A subdirectory or file \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\Shaders\ already exists.
+         A subdirectory or file C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\ already exists.
+         A subdirectory or file C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\_Binary\Shaders\ already exists.
                  1 file(s) copied.
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\GL\bin\glew32.dll
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\GL\bin\glew32.dll
          1 File(s) copied
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\bin\MyEngine.dll
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\bin\MyEngine_d.dll
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\bin\MyEngine.dll
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\bin\MyEngine_d.dll
          2 File(s) copied
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Basic.fs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Basic.vs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Color.fs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Color.vs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShader.fs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShader.vs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShaderBW.fs
-         \\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShaderInv.fs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Basic.fs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Basic.vs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Color.fs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\Color.vs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShader.fs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShader.vs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShaderBW.fs
+         C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\include\ME\Shaders\MEShaderInv.fs
          8 File(s) copied
-     1>Done Building Project "\\banner.main.ad.rit.edu\students\tcg3234\IGMProfile\Desktop\DSA2\DSA2-boundingboxes\A7 - Bounding Box Manager\0_TestBed\0_TestBed.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\tyler_000\Documents\DSA2-boundingboxes\A7 - Bounding Box Manager\0_TestBed\0_TestBed.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.07
+Time Elapsed 00:00:03.98

@@ -34,9 +34,9 @@ public:
 	//Renders the content of the shape
 	virtual void Render(GLenum mode = GL_TRIANGLES);
 	virtual void Render(matrix4 a_mModelMatrix, vector3 a_vColor = MEDEFAULT);
-	void CompileObject(vector3 a_vColor, String a_sName);
-private:
 	
+private:
+	void CompileObject(vector3 a_vColor, String a_sName);
 	void AddQuad(vector3 a_vBottomLeft, vector3 a_vBottomRight, vector3 a_vTopLeft, vector3 a_vTopRight);
 	void AddTri(vector3 a_vBottomLeft, vector3 a_vBottomRight, vector3 a_vTop);
 };

@@ -38,7 +38,7 @@ BoundingBoxManager::BoundingBoxManager(BoundingBoxManager const& other){ }
 BoundingBoxManager& BoundingBoxManager::operator=(BoundingBoxManager const& other) { return *this; }
 BoundingBoxManager::~BoundingBoxManager(){Release();};
 //Accessors
-//int BoundingBoxManager::GetNumberOfBoxs(void){ return m_nBoxes; }
+int BoundingBoxManager::GetNumberOfBoxes(void){ return m_nBoxes; }
 
 //--- Non Standard Singleton Methods
 void BoundingBoxManager::SetOBBVisible(bool a_bVisible, String a_sInstance)
@@ -56,6 +56,23 @@ void BoundingBoxManager::SetOBBVisible(bool a_bVisible, String a_sInstance)
 		int nBox = m_pModelMngr->IdentifyInstance(a_sInstance);
 		if(nBox < 0 || nBox < m_nBoxes)
 			m_vBoundingBox[nBox]->SetOBBVisible(a_bVisible);
+	}
+}
+void BoundingBoxManager::SetAABBVisible(bool a_bVisible, String a_sInstance)
+{
+	if(a_sInstance == "ALL")
+	{
+		int nBoxes = GetNumberOfBoxes();
+		for(int nBox = 0; nBox < nBoxes; nBox++)
+		{
+			m_vBoundingBox[nBox]->SetAABBVisible(a_bVisible);
+		}
+	}
+	else
+	{
+		int nBox = m_pModelMngr->IdentifyInstance(a_sInstance);
+		if(nBox < 0 || nBox < m_nBoxes)
+			m_vBoundingBox[nBox]->SetAABBVisible(a_bVisible);
 	}
 }
 
@@ -200,11 +217,11 @@ void BoundingBoxManager::CollisionCheck(void)
 				//}
 
 				//set up block
-				vector3 BB1Max = m_vBoundingBox[nBox1]->getOBBMax;
-				vector3 BB1Min = m_vBoundingBox[nBox1]->getOBBMin;
+				vector3 BB1Max = m_vBoundingBox[nBox1]->getOBBMax();
+				vector3 BB1Min = m_vBoundingBox[nBox1]->getOBBMin();
 
-				vector3 BB2Max = m_vBoundingBox[nBox2]->getOBBMax;
-				vector3 BB2Min = m_vBoundingBox[nBox2]->getOBBMin;
+				vector3 BB2Max = m_vBoundingBox[nBox2]->getOBBMax();
+				vector3 BB2Min = m_vBoundingBox[nBox2]->getOBBMin();
 
 				bool colliding = true;
 
