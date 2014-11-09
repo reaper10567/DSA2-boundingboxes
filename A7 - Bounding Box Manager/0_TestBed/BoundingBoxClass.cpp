@@ -33,8 +33,8 @@ BoundingBoxClass::BoundingBoxClass(String a_sInstanceName)
 
 	m_pOBBMesh = new PrimitiveWireClass();
 	CalculateOBBBox(m_sInstance);
-	m_pOBBMesh->GenerateCylinder((m_vOBBMax.x-m_vOBBMin.x),(m_vOBBMax.y-m_vOBBMin.y),4,MEWHITE);
-	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
+	m_pOBBMesh->GenerateCube(1,MEWHITE);
+	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
 	CalculateAABBBox(m_sInstance);
 	//Get the Model to World matrix associated with the Instance
 	
@@ -42,8 +42,8 @@ BoundingBoxClass::BoundingBoxClass(String a_sInstanceName)
 	//right at the origin, which will cause an issue, so we just return with no allocations
 	//Crete a new Sphere and initialize it using the member variables
 	
-	m_pAABBMesh->GenerateCylinder((m_vAABBMax.x-m_vAABBMin.x)/2,(m_vAABBMax.y-m_vAABBMin.y),4,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	m_pAABBMesh->GenerateCube(1,MEWHITE);
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 }
 BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
@@ -59,10 +59,10 @@ BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
 	m_pAABBMesh = new PrimitiveWireClass();
 	
 	m_pOBBMesh = new PrimitiveWireClass();
-	m_pOBBMesh->GenerateCylinder((m_vOBBMax.x-m_vOBBMin.x),(m_vOBBMax.y-m_vOBBMin.y),4,MEWHITE);
-	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
-	m_pAABBMesh->GenerateCylinder((m_vAABBMax.x-m_vAABBMin.x)/2,(m_vAABBMax.y-m_vAABBMin.y),4,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	m_pOBBMesh->GenerateCube(1,MEWHITE);
+	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
+	m_pAABBMesh->GenerateCube(1,MEWHITE);
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 	
 }
@@ -85,10 +85,10 @@ BoundingBoxClass& BoundingBoxClass::operator=(BoundingBoxClass const& other)
 		
 
 		m_pOBBMesh = new PrimitiveWireClass();
-		m_pOBBMesh->GenerateCylinder((m_vOBBMax.x-m_vOBBMin.x),(m_vOBBMax.y-m_vOBBMin.y),4,MEWHITE);
-		m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
-		m_pAABBMesh->GenerateCylinder((m_vAABBMax.x-m_vAABBMin.x)/2,(m_vAABBMax.y-m_vAABBMin.y),4,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+		m_pOBBMesh->GenerateCube(1,MEWHITE);
+		m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
+		m_pAABBMesh->GenerateCube(1,MEWHITE);
+		m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 		
 	}
@@ -135,8 +135,8 @@ void BoundingBoxClass::SetModelMatrix(matrix4 a_mModelMatrix)
 	m_mModelToWorld = a_mModelMatrix;
 	//Sets the Model Matrix of the actual Box shape
 	//(which is translated m_v3Centrod away from the origin of our box)
-	m_pOBBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	m_pOBBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 }
 bool BoundingBoxClass::GetOBBVisible(void) { return m_bOBBVisible; }
