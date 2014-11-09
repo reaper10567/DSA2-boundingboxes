@@ -130,6 +130,23 @@ void BoundingBoxManager::RenderOBB(String a_sInstance)
 			m_vBoundingBox[nBox]->RenderOBB(MEDEFAULT);
 	}
 }
+void BoundingBoxManager::RenderAABB(String a_sInstance)
+{
+	if(a_sInstance == "ALL")
+	{
+		int nBoxs = GetNumberOfBoxes();
+		for(int nBox = 0; nBox < nBoxs; nBox++)
+		{
+			m_vBoundingBox[nBox]->RenderAABB(MEDEFAULT);
+		}
+	}
+	else
+	{
+		int nBox = m_pModelMngr->IdentifyInstance(a_sInstance);
+		if(nBox < 0 || nBox < m_nBoxes)
+			m_vBoundingBox[nBox]->RenderAABB(MEDEFAULT);
+	}
+}
 
 void BoundingBoxManager::AddBox(String a_sInstanceName)
 {

@@ -11,8 +11,9 @@ BoundingBoxClass::BoundingBoxClass(String a_sInstanceName)
 	m_vAABBMin = vector3(0.0f,0.0f,0.0f);
 	m_vOBBMax = vector3(0.0f,0.0f,0.0f);
 	m_vOBBMin = vector3(0.0f,0.0f,0.0f);
-	m_v3Color = MEWHITE;
-	m_mModelToWorld = matrix4(1.0f);
+	m_v3OBBColor = MEWHITE;
+	m_v3AABBColor = MEBLUE;
+	
 	m_bOBBVisible = false;
 	m_bAABBVisible = false;
 	//Get the singleton instance of the Model Manager
@@ -25,20 +26,25 @@ BoundingBoxClass::BoundingBoxClass(String a_sInstanceName)
 	if(nInstance == -1)
 		return;
 
+	m_mModelToWorld = m_pModelMngr->GetModelMatrix(m_sInstance);
 	//Construct a sphere with the dimensions of the instance, they will be allocated in the
 	//corresponding member variables inside the method
+	m_pAABBMesh = new PrimitiveWireClass();
+
+	m_pOBBMesh = new PrimitiveWireClass();
+	CalculateOBBBox(m_sInstance);
+	m_pOBBMesh->GenerateCylinder((m_vOBBMax.x-m_vOBBMin.x),(m_vOBBMax.y-m_vOBBMin.y),4,MEWHITE);
+	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
 	CalculateAABBBox(m_sInstance);
 	//Get the Model to World matrix associated with the Instance
-	m_mModelToWorld = m_pModelMngr->GetModelMatrix(m_sInstance);
+	
 	//If the size of the radius is 0 it means that there are no points or all of them are allocated
 	//right at the origin, which will cause an issue, so we just return with no allocations
 	//Crete a new Sphere and initialize it using the member variables
-	m_pAABBMesh = new PrimitiveWireClass();
-	m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid));
-	m_pOBBMesh = new PrimitiveWireClass();
-	m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
-	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid));
+	
+	m_pAABBMesh->GenerateCylinder((m_vAABBMax.x-m_vAABBMin.x)/2,(m_vAABBMax.y-m_vAABBMin.y),4,MEWHITE);
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	
 }
 BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
 {
@@ -51,11 +57,14 @@ BoundingBoxClass::BoundingBoxClass(BoundingBoxClass const& other)
 	m_pModelMngr = other.m_pModelMngr;
 
 	m_pAABBMesh = new PrimitiveWireClass();
-	m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
-	m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid));
+	
 	m_pOBBMesh = new PrimitiveWireClass();
-	m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
-	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid));
+	m_pOBBMesh->GenerateCylinder((m_vOBBMax.x-m_vOBBMin.x),(m_vOBBMax.y-m_vOBBMin.y),4,MEWHITE);
+	m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
+	m_pAABBMesh->GenerateCylinder((m_vAABBMax.x-m_vAABBMin.x)/2,(m_vAABBMax.y-m_vAABBMin.y),4,MEWHITE);
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	
+	
 }
 BoundingBoxClass& BoundingBoxClass::operator=(BoundingBoxClass const& other)
 {
@@ -73,12 +82,15 @@ BoundingBoxClass& BoundingBoxClass::operator=(BoundingBoxClass const& other)
 		m_pModelMngr = other.m_pModelMngr;	
 
 		m_pAABBMesh = new PrimitiveWireClass();
-		m_pAABBMesh->GenerateCube(1.0f,MEWHITE);
-		m_pAABBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3AABBCentroid));
+		
 
 		m_pOBBMesh = new PrimitiveWireClass();
-		m_pOBBMesh->GenerateCube(1.0f,MEWHITE);
-		m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid));
+		m_pOBBMesh->GenerateCylinder((m_vOBBMax.x-m_vOBBMin.x),(m_vOBBMax.y-m_vOBBMin.y),4,MEWHITE);
+		m_pOBBMesh->SetModelMatrix(glm::translate(m_mModelToWorld, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
+		m_pAABBMesh->GenerateCylinder((m_vAABBMax.x-m_vAABBMin.x)/2,(m_vAABBMax.y-m_vAABBMin.y),4,MEWHITE);
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	
+		
 	}
 	return *this;
 }
@@ -110,8 +122,8 @@ void BoundingBoxClass::Release(void)
 //Accessors
 vector3 BoundingBoxClass::GetAABBCentroid(void){ return m_v3AABBCentroid; }
 vector3 BoundingBoxClass::GetOBBCentroid(void) {return m_v3OBBCentroid;}
-vector3 BoundingBoxClass::GetColor(void){ return m_v3Color; }
-void BoundingBoxClass::SetColor(vector3 a_v3Color){ m_v3Color = a_v3Color; }
+vector3 BoundingBoxClass::GetColor(void){ return m_v3OBBColor; }
+void BoundingBoxClass::SetColor(vector3 a_v3Color){ m_v3OBBColor = a_v3Color; }
 matrix4 BoundingBoxClass::GetModelMatrix(void){ return m_mModelToWorld; }
 vector3 BoundingBoxClass:: getAABBMax(void){return m_vAABBMax;};
 vector3 BoundingBoxClass:: getAABBMin(void){return m_vAABBMin;};
@@ -123,8 +135,9 @@ void BoundingBoxClass::SetModelMatrix(matrix4 a_mModelMatrix)
 	m_mModelToWorld = a_mModelMatrix;
 	//Sets the Model Matrix of the actual Box shape
 	//(which is translated m_v3Centrod away from the origin of our box)
-	m_pAABBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3AABBCentroid));
-	m_pOBBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3OBBCentroid));
+	m_pOBBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3OBBCentroid)*glm::rotate(matrix4(1.0f),45.0f,vector3(0.0f,1.0f,0.0f)));
+	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid));
+	
 }
 bool BoundingBoxClass::GetOBBVisible(void) { return m_bOBBVisible; }
 void BoundingBoxClass::SetOBBVisible(bool a_bVisible) { m_bOBBVisible = a_bVisible; }
@@ -134,7 +147,7 @@ String BoundingBoxClass::GetInstanceName(void){ return m_sInstance; }
 //Methods
 void BoundingBoxClass::CalculateAABBBox(String a_sInstance)
 {
-	CalculateOBBBox(a_sInstance);
+	//CalculateOBBBox(a_sInstance);
 	//Get the vertices List to calculate the maximum and minimum
 	std::vector<vector3> vVertices = m_pOBBMesh->GetVertices();
 	int nVertices = static_cast<int>(vVertices.size());
@@ -190,7 +203,7 @@ void BoundingBoxClass::CalculateAABBBox(String a_sInstance)
 	m_v3AABBCentroid /= 2.0f;
 	
 	
-	SetModelMatrix(glm::scale(m_v3AABBCentroid));
+	//SetModelMatrix(glm::scale(m_v3AABBCentroid));
 	return;
 }
 
@@ -251,7 +264,7 @@ void BoundingBoxClass::CalculateOBBBox(String a_sInstance)
 	m_v3OBBCentroid /= 2.0f;
 	
 	
-	SetModelMatrix(glm::scale(m_v3OBBCentroid));
+	//SetModelMatrix(glm::scale(m_v3OBBCentroid));
 	return;
 }
 
@@ -265,7 +278,7 @@ void BoundingBoxClass::RenderOBB( vector3 a_vColor )
 	vector3 vColor;
 	//if the argument was MEDEFAULT just use the color variable in our class
 	if(a_vColor == MEDEFAULT)
-		vColor = m_v3Color;
+		vColor = m_v3OBBColor;
 	else //Otherwise use the argument
 		vColor = a_vColor;
 
@@ -284,7 +297,7 @@ void BoundingBoxClass::RenderAABB( vector3 a_vColor )
 	vector3 vColor;
 	//if the argument was MEDEFAULT just use the color variable in our class
 	if(a_vColor == MEDEFAULT)
-		vColor = m_v3Color;
+		vColor = m_v3AABBColor;
 	else //Otherwise use the argument
 		vColor = a_vColor;
 

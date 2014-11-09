@@ -16,7 +16,8 @@ class BoundingBoxClass
 	bool m_bAABBVisible;
 	vector3 m_v3AABBCentroid;//Centroid of the Box
 	vector3 m_v3OBBCentroid;
-	vector3 m_v3Color;//Color of the box
+	vector3 m_v3OBBColor;//Color of the box
+	vector3 m_v3AABBColor;
 	matrix4 m_mModelToWorld;//Model matrix of the box
 	PrimitiveWireClass* m_pOBBMesh;//box Mesh
 	PrimitiveWireClass* m_pAABBMesh;
