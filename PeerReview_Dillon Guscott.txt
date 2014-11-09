@@ -1,0 +1,7 @@
+8/10
+
+Tyler did a lot of the work making the entire project run and honestly probably desrves a 10 for peer review.
+The only real issue is that we didn't manage to get everything working the way we were hoping to, we spent
+about 6 hrs trying to fix minor things and figure out what needed to change in order to get our boxes to render.
+The work load was divided roughly 60 - 40, since tyler is a much stronger programmer, he handled the rendering and 
+creation of the boxes as I handled all of the collisions.
