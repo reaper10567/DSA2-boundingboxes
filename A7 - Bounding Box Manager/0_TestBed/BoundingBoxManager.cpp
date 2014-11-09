@@ -198,7 +198,51 @@ void BoundingBoxManager::CollisionCheck(void)
 				//	m_vCollidingNames.push_back(m_vBoundingBox[nBox1]->GetInstanceName());
 				//	m_vCollidingNames.push_back(m_vBoundingBox[nBox2]->GetInstanceName());
 				//}
-				m_vBoundingBox[nBox1]->
+
+				//set up block
+				vector3 BB1Max = m_vBoundingBox[nBox1]->getOBBMax;
+				vector3 BB1Min = m_vBoundingBox[nBox1]->getOBBMin;
+
+				vector3 BB2Max = m_vBoundingBox[nBox2]->getOBBMax;
+				vector3 BB2Min = m_vBoundingBox[nBox2]->getOBBMin;
+
+				bool colliding = true;
+
+				//Collision detection block
+				/*
+					start assuming the two are colliding
+					Start by checking if the x position of the first box is within the bounds of the second box
+					If so continue down 
+					Else set colliding equal to false and break from the statement
+					*this repeats for each case until either it is ruled out or is proven true*
+				*/
+				if(BB1Max.x > BB2Min.x && BB1Max.x < BB2Max.x){
+
+					if(BB1Max.y > BB2Min.y && BB1Max.y < BB2Max.y){
+						
+						if(BB1Max.z > BB2Min.z && BB1Max.z < BB2Max.z){
+							
+						}
+						else{
+							colliding = false;
+						}
+					}
+
+					else{
+						colliding = false;
+					}
+				}
+
+				else{
+					colliding = false;
+				}
+
+				//Determine check to see if the collision detection passed or failed, and add names to list of colliding objects accordingly
+				if(colliding)
+				{
+					m_vCollidingNames.push_back(m_vBoundingBox[nBox1]->GetInstanceName());
+					m_vCollidingNames.push_back(m_vBoundingBox[nBox2]->GetInstanceName());
+				}
 			}
 		}
 	}
