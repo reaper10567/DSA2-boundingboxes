@@ -136,6 +136,7 @@ void BoundingBoxClass::SetModelMatrix(matrix4 a_mModelMatrix)
 	//Sets the Model Matrix of the actual Box shape
 	//(which is translated m_v3Centrod away from the origin of our box)
 	m_pOBBMesh->SetModelMatrix(glm::translate(a_mModelMatrix, m_v3OBBCentroid)*glm::scale(m_vOBBMax-m_vOBBMin));
+	CalculateAABBBox(m_sInstance);
 	m_pAABBMesh->SetModelMatrix(glm::translate(m_pOBBMesh->GetModelMatrix(), m_v3AABBCentroid)*glm::scale(m_vAABBMax-m_vAABBMin));
 	
 }
