@@ -234,11 +234,32 @@ void BoundingBoxManager::CollisionCheck(void)
 				//}
 
 				//set up block
-				vector3 BB1Max = m_vBoundingBox[nBox1]->getOBBMax();
-				vector3 BB1Min = m_vBoundingBox[nBox1]->getOBBMin();
 
-				vector3 BB2Max = m_vBoundingBox[nBox2]->getOBBMax();
-				vector3 BB2Min = m_vBoundingBox[nBox2]->getOBBMin();
+				matrix4 mMatrix1 = m_vBoundingBox[nBox1]->GetModelMatrix();
+				vector3 vCentroid1 = m_vBoundingBox[nBox1]->GetOBBCentroid();
+				vector3 Origin1 = static_cast<vector3>(glm::translate(mMatrix1,vCentroid1) * vector4(0.0f,0.0f,0.0f,1.0f));
+
+				vector3 BB1Max = m_vBoundingBox[nBox1]->getOBBMax() + Origin1;
+				float BB1_Max_X = Origin1.x + BB1Max.x; 
+				float BB1_Max_Y = Origin1.y + BB1Max.y; 
+				float BB1_Max_Z = Origin1.z + BB1Max.z; 
+				vector3 BB1Min = m_vBoundingBox[nBox1]->getOBBMin() + Origin1;
+				float BB1_Min_X = Origin1.x + BB1Min.x; 
+				float BB1_Min_Y = Origin1.y + BB1Min.y; 
+				float BB1_Min_Z = Origin1.z + BB1Min.z; 
+
+				matrix4 mMatrix2 = m_vBoundingBox[nBox2]->GetModelMatrix();
+				vector3 vCentroid2 = m_vBoundingBox[nBox2]->GetOBBCentroid();
+				vector3 Origin2 = static_cast<vector3>(glm::translate(mMatrix2,vCentroid2)* vector4(0.0f,0.0f,0.0f,1.0f));
+
+				vector3 BB2Max = m_vBoundingBox[nBox2]->getOBBMax()+Origin2;
+				float BB2_Max_X = Origin2.x + BB2Max.x; 
+				float BB2_Max_Y = Origin2.y + BB2Max.y; 
+				float BB2_Max_Z = Origin2.z + BB2Max.z; 
+				vector3 BB2Min = m_vBoundingBox[nBox2]->getOBBMin()+Origin2;
+				float BB2_Min_X = Origin2.x + BB2Min.x; 
+				float BB2_Min_Y = Origin2.y + BB2Min.y; 
+				float BB2_Min_Z = Origin2.z + BB2Min.z; 
 
 				bool colliding = true;
 
@@ -250,25 +271,22 @@ void BoundingBoxManager::CollisionCheck(void)
 					Else set colliding equal to false and break from the statement
 					*this repeats for each case until either it is ruled out or is proven true*
 				*/
-				if(BB1Max.x > BB2Min.x && BB1Max.x < BB2Max.x){
-
-					if(BB1Max.y > BB2Min.y && BB1Max.y < BB2Max.y){
-						
-						if(BB1Max.z > BB2Min.z && BB1Max.z < BB2Max.z){
-							
-						}
-						else{
-							colliding = false;
-						}
-					}
-
-					else{
-						colliding = false;
-					}
+				//
+				if(BB1_Max_X > BB2_Min_X  && BB1_Max_X <BB2_Max_X){
+					//if((BB1_Max_Z > BB2_Min_Z )||(BB2_Max_Z > BB1_Min_Z)){
+					//	if((BB1_Max_Y > BB2_Min_Y )||(BB2_Max_Y > BB1_Min_Y)){
+					//
+					//	}
+					//	else{
+					//		colliding = false;
+					//	}
+					//}
+					//else{
+					//	colliding = false;
+					//}
 				}
-
 				else{
-					colliding = false;
+						colliding= false;
 				}
 
 				//Determine check to see if the collision detection passed or failed, and add names to list of colliding objects accordingly
@@ -298,6 +316,6 @@ void BoundingBoxManager::CollisionResponse(void)
 	for(int nBox = 0; nBox < m_nBoxes; nBox++)
 	{
 		if(CheckForNameInList(m_vBoundingBox[nBox]->GetInstanceName()))
-			m_vBoundingBox[nBox]->SetColor(MERED);
+			m_vBoundingBox[nBox]->SetColor(MEYELLOW);
 	}
 }
