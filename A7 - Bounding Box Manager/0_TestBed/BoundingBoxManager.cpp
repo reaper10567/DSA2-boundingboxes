@@ -209,45 +209,28 @@ void BoundingBoxManager::CollisionCheck(void)
 		{
 			if(nBox1 != nBox2)
 			{
-				////Get Radius of Box1
-				//float fRadius1 = m_vBoundingBox[nBox1]->GetRadius();
-				//
-				////Get Radius of Box2
-				//float fRadius2 = m_vBoundingBox[nBox2]->GetRadius();
-				//
-				////Get origin of Box1
-				//matrix4 mMatrix1 = m_vBoundingBox[nBox1]->GetModelMatrix();
-				//vector3 vCentroid1 = m_vBoundingBox[nBox1]->GetCentroid();
-				//vector3 fOrigin1 = static_cast<vector3>(glm::translate(mMatrix1, vCentroid1) * vector4(0.0f, 0.0f, 0.0f, 1.0f));
-				//
-				////Get origin of Box2
-				//matrix4 mMatrix2 = m_vBoundingBox[nBox2]->GetModelMatrix();
-				//vector3 vCentroid2 = m_vBoundingBox[nBox2]->GetCentroid();
-				//vector3 fOrigin2 = static_cast<vector3>(glm::translate(mMatrix2, vCentroid2) * vector4(0.0f, 0.0f, 0.0f, 1.0f));
-				//
-				//float fDistance = glm::distance(fOrigin1,fOrigin2);
-				//float fRadiusSum = fRadius1 + fRadius2;
-				//if(fDistance < fRadiusSum)
-				//{
-				//	m_vCollidingNames.push_back(m_vBoundingBox[nBox1]->GetInstanceName());
-				//	m_vCollidingNames.push_back(m_vBoundingBox[nBox2]->GetInstanceName());
-				//}
-
 				//set up block
 
+				//Get the matrix and center of the first box
+				//static cast those values in order to get the box's origin after the program begins running
 				matrix4 mMatrix1 = m_vBoundingBox[nBox1]->GetModelMatrix();
 				vector3 vCentroid1 = m_vBoundingBox[nBox1]->GetAABBCentroid();
 				vector3 Origin1 = static_cast<vector3>(glm::translate(mMatrix1,vCentroid1) * vector4(0.0f,0.0f,0.0f,1.0f));
 
+				//get the max values of the first
+				//find the max values by adding the max values of each box to the origin point of the box
 				vector3 BB1Max = m_vBoundingBox[nBox1]->getAABBMax();
 				float BB1_Max_X = Origin1.x + BB1Max.x; 
 				float BB1_Max_Y = Origin1.y + BB1Max.y; 
 				float BB1_Max_Z = Origin1.z + BB1Max.z; 
+
+				//repeat the same for the min values 
 				vector3 BB1Min = m_vBoundingBox[nBox1]->getAABBMin();
 				float BB1_Min_X = Origin1.x + BB1Min.x; 
 				float BB1_Min_Y = Origin1.y + BB1Min.y; 
 				float BB1_Min_Z = Origin1.z + BB1Min.z; 
 
+				//repeat for the second box
 				matrix4 mMatrix2 = m_vBoundingBox[nBox2]->GetModelMatrix();
 				vector3 vCentroid2 = m_vBoundingBox[nBox2]->GetAABBCentroid();
 				vector3 Origin2 = static_cast<vector3>(glm::translate(mMatrix2,vCentroid2)* vector4(0.0f,0.0f,0.0f,1.0f));
@@ -256,11 +239,13 @@ void BoundingBoxManager::CollisionCheck(void)
 				float BB2_Max_X = Origin2.x + BB2Max.x; 
 				float BB2_Max_Y = Origin2.y + BB2Max.y; 
 				float BB2_Max_Z = Origin2.z + BB2Max.z; 
+
 				vector3 BB2Min = m_vBoundingBox[nBox2]->getAABBMin();
 				float BB2_Min_X = Origin2.x + BB2Min.x; 
 				float BB2_Min_Y = Origin2.y + BB2Min.y; 
 				float BB2_Min_Z = Origin2.z + BB2Min.z; 
 
+				//start them off as colliding
 				bool colliding = true;
 
 				//Collision detection block
@@ -271,7 +256,9 @@ void BoundingBoxManager::CollisionCheck(void)
 					Else set colliding equal to false and break from the statement
 					*this repeats for each case until either it is ruled out or is proven true*
 				*/
-				//
+				//if the max value of the first box is less than the min value of the second
+				//or the min value of the first is greater than the max value of the second, declare false
+				//repeat for the x y and z cases
 				if(BB1_Max_X < BB2_Min_X || BB1_Min_X > BB2_Max_X){colliding = false;}
 				if(BB1_Max_Y < BB2_Min_Y || BB1_Min_Y > BB2_Max_Y){colliding = false;}
 				if(BB1_Max_Z < BB2_Min_Z || BB1_Min_Z > BB2_Max_Z){colliding = false;}
