@@ -236,27 +236,27 @@ void BoundingBoxManager::CollisionCheck(void)
 				//set up block
 
 				matrix4 mMatrix1 = m_vBoundingBox[nBox1]->GetModelMatrix();
-				vector3 vCentroid1 = m_vBoundingBox[nBox1]->GetOBBCentroid();
+				vector3 vCentroid1 = m_vBoundingBox[nBox1]->GetAABBCentroid();
 				vector3 Origin1 = static_cast<vector3>(glm::translate(mMatrix1,vCentroid1) * vector4(0.0f,0.0f,0.0f,1.0f));
 
-				vector3 BB1Max = m_vBoundingBox[nBox1]->getOBBMax();
+				vector3 BB1Max = m_vBoundingBox[nBox1]->getAABBMax();
 				float BB1_Max_X = Origin1.x + BB1Max.x; 
 				float BB1_Max_Y = Origin1.y + BB1Max.y; 
 				float BB1_Max_Z = Origin1.z + BB1Max.z; 
-				vector3 BB1Min = m_vBoundingBox[nBox1]->getOBBMin();
+				vector3 BB1Min = m_vBoundingBox[nBox1]->getAABBMin();
 				float BB1_Min_X = Origin1.x + BB1Min.x; 
 				float BB1_Min_Y = Origin1.y + BB1Min.y; 
 				float BB1_Min_Z = Origin1.z + BB1Min.z; 
 
 				matrix4 mMatrix2 = m_vBoundingBox[nBox2]->GetModelMatrix();
-				vector3 vCentroid2 = m_vBoundingBox[nBox2]->GetOBBCentroid();
+				vector3 vCentroid2 = m_vBoundingBox[nBox2]->GetAABBCentroid();
 				vector3 Origin2 = static_cast<vector3>(glm::translate(mMatrix2,vCentroid2)* vector4(0.0f,0.0f,0.0f,1.0f));
 
-				vector3 BB2Max = m_vBoundingBox[nBox2]->getOBBMax();
+				vector3 BB2Max = m_vBoundingBox[nBox2]->getAABBMax();
 				float BB2_Max_X = Origin2.x + BB2Max.x; 
 				float BB2_Max_Y = Origin2.y + BB2Max.y; 
 				float BB2_Max_Z = Origin2.z + BB2Max.z; 
-				vector3 BB2Min = m_vBoundingBox[nBox2]->getOBBMin();
+				vector3 BB2Min = m_vBoundingBox[nBox2]->getAABBMin();
 				float BB2_Min_X = Origin2.x + BB2Min.x; 
 				float BB2_Min_Y = Origin2.y + BB2Min.y; 
 				float BB2_Min_Z = Origin2.z + BB2Min.z; 
