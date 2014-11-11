@@ -195,7 +195,7 @@ void BoundingBoxManager::Update(void)
 	m_vCollidingNames.clear();
 	for(int nBox = 0; nBox < m_nBoxes; nBox++)
 	{
-		m_vBoundingBox[nBox]->SetColor(MEWHITE);
+		m_vBoundingBox[nBox]->SetColor(MEBLUE);
 	}
 	CollisionCheck();
 	CollisionResponse();
@@ -220,15 +220,15 @@ void BoundingBoxManager::CollisionCheck(void)
 				//get the max values of the first
 				//find the max values by adding the max values of each box to the origin point of the box
 				vector3 BB1Max = m_vBoundingBox[nBox1]->getAABBMax();
-				float BB1_Max_X = Origin1.x + BB1Max.x; 
-				float BB1_Max_Y = Origin1.y + BB1Max.y; 
-				float BB1_Max_Z = Origin1.z + BB1Max.z; 
+				float BB1_Max_X =  BB1Max.x; 
+				float BB1_Max_Y =  BB1Max.y; 
+				float BB1_Max_Z =  BB1Max.z; 
 
 				//repeat the same for the min values 
 				vector3 BB1Min = m_vBoundingBox[nBox1]->getAABBMin();
-				float BB1_Min_X = Origin1.x + BB1Min.x; 
-				float BB1_Min_Y = Origin1.y + BB1Min.y; 
-				float BB1_Min_Z = Origin1.z + BB1Min.z; 
+				float BB1_Min_X =  BB1Min.x; 
+				float BB1_Min_Y =  BB1Min.y; 
+				float BB1_Min_Z =  BB1Min.z; 
 
 				//repeat for the second box
 				matrix4 mMatrix2 = m_vBoundingBox[nBox2]->GetModelMatrix();
@@ -236,14 +236,14 @@ void BoundingBoxManager::CollisionCheck(void)
 				vector3 Origin2 = static_cast<vector3>(glm::translate(mMatrix2,vCentroid2)* vector4(0.0f,0.0f,0.0f,1.0f));
 
 				vector3 BB2Max = m_vBoundingBox[nBox2]->getAABBMax();
-				float BB2_Max_X = Origin2.x + BB2Max.x; 
-				float BB2_Max_Y = Origin2.y + BB2Max.y; 
-				float BB2_Max_Z = Origin2.z + BB2Max.z; 
+				float BB2_Max_X =  BB2Max.x; 
+				float BB2_Max_Y =  BB2Max.y; 
+				float BB2_Max_Z =  BB2Max.z; 
 
 				vector3 BB2Min = m_vBoundingBox[nBox2]->getAABBMin();
-				float BB2_Min_X = Origin2.x + BB2Min.x; 
-				float BB2_Min_Y = Origin2.y + BB2Min.y; 
-				float BB2_Min_Z = Origin2.z + BB2Min.z; 
+				float BB2_Min_X =  BB2Min.x; 
+				float BB2_Min_Y =  BB2Min.y; 
+				float BB2_Min_Z =  BB2Min.z; 
 
 				//start them off as colliding
 				bool colliding = true;
@@ -291,6 +291,6 @@ void BoundingBoxManager::CollisionResponse(void)
 	for(int nBox = 0; nBox < m_nBoxes; nBox++)
 	{
 		if(CheckForNameInList(m_vBoundingBox[nBox]->GetInstanceName()))
-			m_vBoundingBox[nBox]->SetColor(MEYELLOW);
+			m_vBoundingBox[nBox]->SetColor(MERED);
 	}
 }
